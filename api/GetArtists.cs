@@ -6,17 +6,17 @@ using Microsoft.Extensions.Logging;
 
 namespace FunctionApp1
 {
-    public class GetArtistsFunction
+    public class GetArtists
     {
-        private readonly ILogger<GetArtistsFunction> _logger;
+        private readonly ILogger<GetArtists> _logger;
 
-        public GetArtistsFunction(ILogger<GetArtistsFunction> logger)
+        public GetArtists(ILogger<GetArtists> logger)
         {
             _logger = logger;
         }
 
         [Function("GetArtists")]
-        public IActionResult GetArtists([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
+        public IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
         {
             _logger.LogInformation("Get artists");
 
@@ -50,23 +50,6 @@ namespace FunctionApp1
                 }
             };
             return new OkObjectResult(artists);
-        }
-
-        [Function("GetStages")]
-        public IActionResult GetStages([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req)
-        {
-            _logger.LogInformation("Get stages");
-
-            var stages = new List<Stage>()
-            {
-                new Stage()
-                {
-                    Id = 786,
-                    Name = "Mainstage"
-                }
-            };
-
-            return new OkObjectResult(stages);
         }
     }
 }
