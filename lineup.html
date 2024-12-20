@@ -35,8 +35,8 @@
       })();
 
       (async function getStages() {
-        let json = await resp.json();
         let resp = await fetch("api/getstages");
+        let json = await resp.json();
         let ul = document.querySelector("#stages");
         json.forEach((element) => {
           let li = document.createElement("li");
